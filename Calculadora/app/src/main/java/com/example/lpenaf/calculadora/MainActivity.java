@@ -28,31 +28,35 @@ public class MainActivity extends AppCompatActivity {
     public void calcula(View view){
         int resp = 0;
         int oper1, oper2;
-        if(num1.getText().toString().equals(""))
-            oper1 = 0;
-        else
+        boolean most = true;
+
+        if(!num1.getText().toString().equals("") && !num2.getText().toString().equals("")) {
             oper1 = Integer.parseInt(num1.getText().toString());
-        if(num2.getText().toString().equals(""))
-            oper2 = 0;
-        else
             oper2 = Integer.parseInt(num2.getText().toString());
 
-        if(r1.isChecked())
-            resp = oper1 + oper2;
-        else if(r2.isChecked())
-            resp = oper1 - oper2;
-        else if(r3.isChecked())
-            resp = oper1 * oper2;
-        else if(r4.isChecked()){
-            if(oper2 != 0)
-                resp = oper1 / oper2;
-            else
+            if (r1.isChecked())
+                resp = oper1 + oper2;
+            else if (r2.isChecked())
+                resp = oper1 - oper2;
+            else if (r3.isChecked())
+                resp = oper1 * oper2;
+            else if (r4.isChecked()) {
+                if (oper2 != 0)
+                    resp = oper1 / oper2;
+                else {
+                    error();
+                    most = false;
+                }
+            } else if (oper1 == 0 && oper2 == 0) {
                 error();
-        } else if(oper1 == 0 && oper2 == 0)
-            error();
-        else
-            resp = (int) Math.pow(oper1, oper2);
-        mostrar(resp);
+                most = false;
+            }
+            else
+                resp = (int) Math.pow(oper1, oper2);
+            if(most)
+                mostrar(resp);
+        } else
+            Toast.makeText(this,"Ingresa los números faltantes", Toast.LENGTH_LONG).show();
     }
 
     public void mostrar(int num){
