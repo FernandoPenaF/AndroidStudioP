@@ -10,8 +10,68 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.fernando.app1.MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!" />
+
+
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:text="Selecciona el idioma: "
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:id="@+id/lbIdioma" />
+
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:checkedButton="@+id/rbEsp">
+
+                <RadioButton
+                    android:text="Español"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/rbEsp"
+                    android:layout_weight="1"
+                    android:onClick="cambiaIdioma"/>
+
+                <RadioButton
+                    android:text="English"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/rbIng"
+                    android:layout_weight="1"
+                    android:onClick="cambiaIdioma"/>
+
+                <RadioButton
+                    android:text="Français"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/rbFran"
+                    android:layout_weight="1"
+                    android:onClick="cambiaIdioma"/>
+
+            </RadioGroup>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Continuar"
+                android:onClick="continuar"
+                android:id="@+id/btContinuar"/>
+        </LinearLayout>
+    </LinearLayout>
 </RelativeLayout>
