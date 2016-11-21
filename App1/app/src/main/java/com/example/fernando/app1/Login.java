@@ -50,7 +50,8 @@ public class Login extends AppCompatActivity {
         if(mail.getText().toString().equals(correo) && pass.getText().toString().equals(contraseña)) {
             Intent intent = new Intent(Login.this, Main2Activity.class);
             Bundle bundle = new Bundle();
-            bundle.putString("Mail", mail.getText().toString());
+            bundle.putInt("Idioma", selectedLanguage);
+            bundle.putString("Correo", mail.getText().toString());
             intent.putExtras(bundle);
             startActivity(intent);
         } else
