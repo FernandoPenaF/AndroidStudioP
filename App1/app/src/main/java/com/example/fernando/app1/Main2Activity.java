@@ -12,7 +12,7 @@ public class Main2Activity extends AppCompatActivity {
     private int selectedLanguage;
     private String correo;
     private TextView label;
-    private EditText celcius, farenheit;
+    private EditText celcius, farenheit, kelvin;
     private boolean changed;
 
     @Override
@@ -24,6 +24,7 @@ public class Main2Activity extends AppCompatActivity {
         label = (TextView)findViewById(R.id.lbBienvenido);
         celcius = (EditText)findViewById(R.id.etCelcius);
         farenheit = (EditText)findViewById(R.id.etFarenheit);
+        kelvin = (EditText)findViewById(R.id.etKelvin);
         selectedLanguage = (int) bundle.get("Idioma");
         correo = (String) bundle.get("Correo");
         changed = false;
@@ -35,10 +36,14 @@ public class Main2Activity extends AppCompatActivity {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if(!changed) {
                     changed = true;
-                    if (!celcius.getText().toString().equals(""))
+                    if (!celcius.getText().toString().equals("") && !celcius.getText().toString().equals("-") && !celcius.getText().toString().equals(".")) {
                         farenheit.setText(String.valueOf(toFarenheit(Double.valueOf(celcius.getText().toString()))));
-                    else
+                        kelvin.setText(String.valueOf(toKelvin(Double.valueOf(celcius.getText().toString()))));
+                    }
+                    else {
                         farenheit.setText("");
+                        kelvin.setText("");
+                    }
                     changed = false;
                 }
             }
@@ -60,10 +65,43 @@ public class Main2Activity extends AppCompatActivity {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if(!changed) {
                     changed = true;
-                    if (!farenheit.getText().toString().equals(""))
+                    if (!farenheit.getText().toString().equals("") && !farenheit.getText().toString().equals("-") && !farenheit.getText().toString().equals(".")) {
                         celcius.setText(String.valueOf(toCelcius(Double.valueOf(farenheit.getText().toString()))));
-                    else
+                        kelvin.setText(String.valueOf(toKelvin(Double.valueOf(celcius.getText().toString()))));
+                    }
+                    else {
                         celcius.setText("");
+                        kelvin.setText("");
+                    }
+                    changed = false;
+                }
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        };
+
+        final TextWatcher twKelvin = new TextWatcher() {
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if(!changed) {
+                    changed = true;
+                    if (!kelvin.getText().toString().equals("") && !kelvin.getText().toString().equals("-") && !kelvin.getText().toString().equals(".")) {
+                        celcius.setText(String.valueOf(toCelciusFKelvin(Double.valueOf(kelvin.getText().toString()))));
+                        farenheit.setText(String.valueOf(toFarenheit(Double.valueOf(celcius.getText().toString()))));
+                    }
+                    else {
+                        celcius.setText("");
+                        farenheit.setText("");
+                    }
                     changed = false;
                 }
             }
@@ -81,6 +119,7 @@ public class Main2Activity extends AppCompatActivity {
 
         celcius.addTextChangedListener(twCelcius);
         farenheit.addTextChangedListener(twFarenheit);
+        kelvin.addTextChangedListener(twKelvin);
     }
 
     public void setSaludo(){
@@ -98,4 +137,9 @@ public class Main2Activity extends AppCompatActivity {
     public double toKelvin(double cel){
         return cel + 273.15;
     }
+
+    public double toCelciusFKelvin(double kel){
+        return kel - 273.15;
+    }
+
 }
