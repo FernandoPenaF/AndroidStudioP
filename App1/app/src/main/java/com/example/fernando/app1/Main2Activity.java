@@ -13,6 +13,7 @@ public class Main2Activity extends AppCompatActivity {
     private String correo;
     private TextView label;
     private EditText celcius, farenheit;
+    private boolean changed;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,16 +26,21 @@ public class Main2Activity extends AppCompatActivity {
         farenheit = (EditText)findViewById(R.id.etFarenheit);
         selectedLanguage = (int) bundle.get("Idioma");
         correo = (String) bundle.get("Correo");
+        changed = false;
         setSaludo();
 
-        celcius.addTextChangedListener(new TextWatcher() {
+        final TextWatcher twCelcius = new TextWatcher() {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if(!celcius.getText().toString().equals(""))
-                    farenheit.setText(String.valueOf(toFarenheit(Double.valueOf(celcius.getText().toString()))));
-                else
-                    farenheit.setText("");
+                if(!changed) {
+                    changed = true;
+                    if (!celcius.getText().toString().equals(""))
+                        farenheit.setText(String.valueOf(toFarenheit(Double.valueOf(celcius.getText().toString()))));
+                    else
+                        farenheit.setText("");
+                    changed = false;
+                }
             }
 
             @Override
@@ -46,7 +52,35 @@ public class Main2Activity extends AppCompatActivity {
             public void afterTextChanged(Editable s) {
 
             }
-        });
+        };
+
+        final TextWatcher twFarenheit = new TextWatcher() {
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if(!changed) {
+                    changed = true;
+                    if (!farenheit.getText().toString().equals(""))
+                        celcius.setText(String.valueOf(toCelcius(Double.valueOf(farenheit.getText().toString()))));
+                    else
+                        celcius.setText("");
+                    changed = false;
+                }
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        };
+
+        celcius.addTextChangedListener(twCelcius);
+        farenheit.addTextChangedListener(twFarenheit);
     }
 
     public void setSaludo(){
@@ -54,11 +88,14 @@ public class Main2Activity extends AppCompatActivity {
     }
 
     public double toFarenheit(double cel){
-        return ((1.8) * cel) + 32;
+        return ((9 / 5.0) * cel) + 32;
     }
 
     public double toCelcius(double far){
-        return (0.55) * (far - 32);
+        return (5 / 9.0) * (far - 32);
     }
 
+    public double toKelvin(double cel){
+        return cel + 273.15;
+    }
 }
