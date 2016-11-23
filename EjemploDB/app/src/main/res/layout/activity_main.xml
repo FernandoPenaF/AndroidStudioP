@@ -82,6 +82,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Eliminar"
+                android:onClick="eliminar"
                 android:id="@+id/btEliminar" />
         </LinearLayout>
 
@@ -102,6 +103,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Modificar"
+                android:onClick="modifica"
                 android:id="@+id/btModificar" />
         </LinearLayout>
 
@@ -116,6 +118,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Limpiar"
+                android:onClick="limpiar"
                 android:id="@+id/btLimpiar" />
         </LinearLayout>
     </LinearLayout>
