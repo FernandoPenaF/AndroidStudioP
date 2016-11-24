@@ -47,11 +47,12 @@ public class BlankFragment extends Fragment {
                 long clave=iBD.insertarDatos(s);
                 //Mostrar la llave primaria en un toast
                 Toast.makeText(v.getContext(),"Llave: "+clave,Toast.LENGTH_SHORT).show();
-                FragmentTransaction ft=fm.beginTransaction();
-                android.app.Fragment fl=new FragmentoLista();
+                FragmentTransaction ft = fm.beginTransaction();
+                android.app.Fragment fl = new FragmentoLista();
                 ft.replace(R.id.actividadPrincipal,fl);
                 ft.commit();
             }
         });
+        return view;
     }
 }
