@@ -111,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this, "Busca un alumno para eliminarlo", Toast.LENGTH_SHORT).show();
         }
     }
-    
+
     public boolean estaVacia(){
         return et1.getText().toString().equals("") && et2.getText().toString().equals("") && et3.getText().toString().equals("") && et4.getText().toString().equals("");
     }
