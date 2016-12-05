@@ -9,7 +9,7 @@ import android.database.sqlite.SQLiteOpenHelper;
  */
 public class AdminSQLiteOpenHelper extends SQLiteOpenHelper{
 
-    private final String alumno = "CREATE TABLE IF NOT EXISTS alumno(cu INTEGER primary key not null, nombre text not null, correo text not null, carrera text not null, universidad text not null);";
+    private final String alumno = "CREATE TABLE IF NOT EXISTS alumno(_id INTEGER primary key not null, nombre text not null, correo text not null, carrera text not null, universidad text not null);";
 
     public AdminSQLiteOpenHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
         super(context, name, factory, version);

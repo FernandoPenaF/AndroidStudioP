@@ -1,29 +1,41 @@
 package com.example.lpenaf.basedatos;
 
-import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.support.v4.widget.SimpleCursorAdapter;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.View;
+import android.os.Bundle;
+import android.support.v7.widget.RecyclerView;
+import android.widget.Adapter;
+import android.widget.ListAdapter;
+import android.widget.ListView;
 
 public class Main2Activity extends AppCompatActivity {
+    private SimpleCursorAdapter sca;
+    private Cursor lista;
+    private Adapter adapter;
+    private ListView vista;
+    private ListAdapter listAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        vista = (ListView)findViewById(R.id.listView);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+        String col[] = {"_id", "nombre", "correo", "carrera", "universidad"};
+        int to[] = {R.id.textView6, R.id.textView7, R.id.textView8, R.id.textView9, R.id.textView10};
+        lista = getList();
+        sca = new SimpleCursorAdapter(this, R.layout.formato_renglon, lista, col, to, 0);
+        vista.setAdapter(sca);
     }
 
+    private Cursor getList(){
+        AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(this, "ITAMa", null, 1);
+        SQLiteDatabase database = admin.getWritableDatabase();
+
+        String query = "SELECT * FROM alumno";
+        Cursor lista = database.rawQuery(query, null);
+        return lista;
+    }
 }
