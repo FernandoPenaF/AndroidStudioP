@@ -24,10 +24,12 @@ public class MainActivity extends AppCompatActivity {
     public void iniciarSesion(View view){
         this.nombre = this.etNombre.getText().toString();
         if(!nombre.equals("")){
+            //Guardar el nombre en un intent
             Intent intent = new Intent(MainActivity.this, Main2Activity.class);
             Bundle bundle = new Bundle();
             bundle.putString("nombre", nombre);
             intent.putExtras(bundle);
+            //Iniciar nueva actividad
             startActivity(intent);
         }else
             Toast.makeText(this,"El nombre está vació", Toast.LENGTH_LONG).show();
