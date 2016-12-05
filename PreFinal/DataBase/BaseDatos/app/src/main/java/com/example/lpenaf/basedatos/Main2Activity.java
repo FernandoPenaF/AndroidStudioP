@@ -1,11 +1,13 @@
 package com.example.lpenaf.basedatos;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v4.widget.SimpleCursorAdapter;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.Adapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -38,4 +40,11 @@ public class Main2Activity extends AppCompatActivity {
         Cursor lista = database.rawQuery(query, null);
         return lista;
     }
+
+    private void regresar(View view){
+        Intent intent = new Intent(Main2Activity.this, MainActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
 }
